@@ -6,7 +6,7 @@ public class JavaHome {
     public static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        System.out.println("Вам необходимо угадать число. У Вас есть три попытки.");
+        System.out.println("Вам необходимо угадать число. У Вас есть только три попытки.");
         int randomNumber = (int) (Math.random() * 9 + 1);
         guessNumber(randomNumber);
     }
