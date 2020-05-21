@@ -4,34 +4,36 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessTheWord {
+    public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         String[] words = {"apple", "orange", "lemon", "banana", "apricot",
                 "avocado", "broccoli", "carrot", "cherry", "garlic", "grape",
                 "melon", "leak", "kiwi", "mango", "mushroom", "nut", "olive",
                 "pea", "peanut", "pear", "pepper", "pineapple", "pumpkin", "potato"};
         System.out.println(Arrays.toString(words));
-        System.out.println(guessWord(words));
-    }
-
-    public static String guessWord(String[] inputWords) {
         Random ran = new Random();
-        int randomNumber = ran.nextInt(inputWords.length);
-        String randomWord = inputWords[randomNumber];
-        System.out.println("Введите слово из предложенных");
-        Scanner scanner = new Scanner(System.in);
-        String userWord = scanner.nextLine();
-        if (randomWord.equals(userWord)) {
-            return "Правильно. Вы отгадали.";
-        }
-        System.out.println(suggestCorrect(randomWord, userWord));
-        while (randomWord.equals(userWord)) {
-            System.out.println("Введите новое слово ");
-            userWord = scanner.nextLine();
-
-            System.out.println(suggestCorrect(randomWord, userWord));
-        }
-        return "Правильно. Вы отгадали.";
+        int randomNumber = ran.nextInt(words.length);
+        String randomWord = words[randomNumber];
+       guessWord(words, randomWord);
     }
+
+    public static void guessWord(String[] inputWords,String inputRandomWord) {
+        String userWord = " ";
+        do {
+            System.out.println("Введите слово из предложенных");
+            userWord = scanner.nextLine();
+            if (inputRandomWord.equals(userWord)) {
+                System.out.println("Верно.");
+                break;
+            }
+
+            String helpMessage = suggestCorrect(inputRandomWord, userWord);
+            System.out.println("Подсказка: " + helpMessage);
+
+        }while (!inputRandomWord.equals(userWord));
+        }
+
+
 
     public static String suggestCorrect (String inputRandomWord, String inputUserWord){
         String result = " ";
@@ -46,7 +48,7 @@ public class GuessTheWord {
                 result += String.valueOf(result2);
             }
         }
-        return (result + "##############");
+        return ("Буквенные совпадения "+result + "##############");
     }
 }
 
